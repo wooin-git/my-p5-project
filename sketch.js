@@ -12,7 +12,8 @@ let forward = true; // 영상 진행 방향
 let speed = 0.8; // 재생 속도 (프레임 단위)
 
 function preload() {
-  vid = createVideo('apt2.mp4');
+  vid = createVideo('assets/apt2.mp4');
+
   vid.hide();
 }
 
