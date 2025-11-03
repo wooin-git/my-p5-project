@@ -27,6 +27,9 @@ function setup() {
     vid.time(0);
     frameRate(30);
   };
+
+  // 자동 재생 제거: 수동으로 play()를 호출하지 않음
+  // 필요시 다른 트리거(버튼 등)에서 vid.play() 호출 가능
 }
 
 function draw() {
@@ -60,27 +63,17 @@ function draw() {
   }
 }
 
-// 터치 또는 클릭 시 프레임 멈추기 + 비디오 재생
+// 터치 또는 클릭 시 프레임만 멈추기 (영상 재생 X)
 function mousePressed() {
-  startVideoIfNeeded();
   freezeFrame(mouseX, mouseY);
   return false;
 }
 
 function touchStarted() {
-  startVideoIfNeeded();
   for (let t of touches) {
     freezeFrame(t.x, t.y);
   }
   return false;
-}
-
-// 모바일 자동 재생 대응
-function startVideoIfNeeded() {
-  if (vid && vid.elt.paused) {
-    vid.play();
-    vid.volume(0); // 무음으로 자동 재생 가능
-  }
 }
 
 // 프레임 멈추고 색상 반전
@@ -116,7 +109,6 @@ function freezeFrame(x, y) {
     text: random(texts)
   });
 }
-
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
